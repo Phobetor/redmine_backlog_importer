@@ -12,7 +12,7 @@ class GoogleDocsBacklogImporterController < ApplicationController
 
   def import
     @project = Project.find(params[:id])
-    @errors = nil
+    @errors = Array.new
     if nil == params || '' == params
       redirect_to :action => 'index', :id => params[:id]
     else
@@ -39,12 +39,11 @@ class GoogleDocsBacklogImporterController < ApplicationController
               "description" => sprintf("Als »%s« möchte ich »%s« damit »%s«.", issueData[2], issueData[3], issueData[4])
             }
             issue = Issue.new(issueParams)
-            if issue.save
-              redirect_to :action => 'index', :id => params[:id]
-            else
-              @errors = issue.errors
+            if !issue.save
+              @errors[] = issue.errors
             end
           end
+          redirect_to :action => 'index', :id => params[:id]
         end
       end
     end
