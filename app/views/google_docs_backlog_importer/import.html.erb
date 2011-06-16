@@ -1,0 +1,33 @@
+<h2>Import issues from Google Docs product backlog table</h2>
+<%= @data[:issues] %>
+<table>
+<% @serializedIssues.split("\n").each do |serializedIssueRow| %>
+  <tr>
+    <% serializedIssueData = serializedIssueRow.split("\t") %>
+    <td>
+      <%= serializedIssueData[0] %>
+    </td>
+    <td>
+      <%= serializedIssueData[1] %>
+    </td>
+    <td>
+      Als »<%= serializedIssueData[2] %>« möchte ich »<%= serializedIssueData[3] %>« damit »<%= serializedIssueData[4] %>«.
+    </td>
+    <td>
+      <% if nil == serializedIssueData[5] or '' == serializedIssueData[5] %>
+        ?
+      <% else %>
+        <%= serializedIssueData[5] %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
+<% if nil != @errors %>
+  <p><strong>Error!</strong></p>
+  <ul>
+  <% @errors.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+<% end %>

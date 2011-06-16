@@ -1,0 +1,3 @@
+= google_docs_backlog_importer
+
+Redmine plugin to import issues from a Google Docs product backlog table

@@ -1,0 +1,9 @@
+<h2>Import Issues from Google Docs product backlog table</h2>
+
+<p>Copy the rows containing the issues you like to import from your Google Docs product backlog and paste them in this textbox:</p>
+
+<% form_tag(:controller => 'google_docs_backlog_importer', :action => 'import', :id => @id) do %>
+	<%= text_area(:import, :issues, :style => "width: 100%; height: 300px;") %>
+	<%= select_tag('import[tracker_id]', options_from_collection_for_select(@trackers, :id, :name)) %>
+	<input type="submit" value="Import issues" />
+<% end %>
