@@ -1,0 +1,9 @@
+<h2>Import issues from Google Docs product backlog table</h2>
+<% if nil != @errors %>
+  <p><strong>Error!</strong></p>
+  <ul>
+  <% @errors.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+<% end %>
