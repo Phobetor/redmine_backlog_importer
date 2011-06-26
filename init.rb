@@ -8,5 +8,5 @@ Redmine::Plugin.register :redmine_backlog_importer do
   url 'https://github.com/phobetor/RedmineBacklogImporter'
   author_url 'https://github.com/phobetor'
   permission :backlog_importer, {:backlog_importer => [:index, :import]}, :public => true
-  menu :project_menu, :rgdb_importer, { :controller => 'backlog_importer', :action => 'index' }, :caption => 'ImportIssues'
+  menu :project_menu, :backlog_importer, { :controller => 'backlog_importer', :action => 'index' }, :caption => 'ImportIssues'
 end
