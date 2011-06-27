@@ -36,9 +36,13 @@ class BacklogImporterController < ApplicationController
               "project" => @project,
               "tracker" => tracker,
               "subject" => sprintf("%s: %s", issueData[0], issueData[1]),
-              "description" => sprintf("Als »%s« möchte ich »%s« damit »%s«.", issueData[2], issueData[3], issueData[4]),
-              "story_points" => issueData[5].to_i
+              "description" => sprintf("Als »%s« möchte ich »%s« damit »%s«.", issueData[2], issueData[3], issueData[4])
             }
+
+            if Issue.column_names.include? :story_points
+              issueParams.story_points = issueData[5].to_i
+            end
+
             issue = Issue.new(issueParams)
             if !issue.save
               @errors[] = issue.errors
