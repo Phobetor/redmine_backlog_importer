@@ -1,7 +1,6 @@
 class BacklogImporterController < ApplicationController
   unloadable
 
-
   def index
     @project = Project.find(params[:id])
     @id = params[:id]
@@ -36,17 +35,20 @@ class BacklogImporterController < ApplicationController
               "project" => @project,
               "tracker" => tracker,
               "subject" => sprintf("%s: %s", issueData[0], issueData[1]),
-              "description" => sprintf("Als »%s« möchte ich »%s« damit »%s«.", issueData[2], issueData[3], issueData[4])
+              "description" => sprintf("Als »%s« möchte ich »%s« damit »%s«.", issueData[3], issueData[4], issueData[5])
             }
 
             if Issue.column_names.include? :story_points
-              issueParams.story_points = issueData[5].to_i
+              issueParams.story_points = issueData[6].to_i
             end
 
             issue = Issue.new(issueParams)
-            if !issue.save
-              @errors[] = issue.errors
-            end
+
+            issue.custom_field_values = {'1' => sprintf("\"%s\":%s", issueData[1], issueData[2])}
+
+              if !issue.save
+                @errors[] = issue.errors
+              end
           end
           redirect_to :action => 'index', :id => params[:id]
         end
