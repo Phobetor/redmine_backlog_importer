@@ -4,9 +4,6 @@ class BacklogImporterController < ApplicationController
   def index
     @project = Project.find(params[:id])
     @id = params[:id]
-
-    @projects = Project.find(:all)
-    @trackers = @projects.map(&:trackers).inject{|memo,t| memo & t}
   end
 
   def import
