@@ -4,6 +4,6 @@
 
 <% form_tag(:controller => 'backlog_importer', :action => 'import', :id => @id) do %>
 	<%= text_area(:import, :issues, :style => "width: 100%; height: 300px;") %>
-	<%= select_tag('import[tracker_id]', options_from_collection_for_select(@trackers, :id, :name)) %>
+	<%= select_tag('import[tracker_id]', options_from_collection_for_select(@project.trackers, :id, :name)) %>
 	<input type="submit" value="Import issues" />
 <% end %>
